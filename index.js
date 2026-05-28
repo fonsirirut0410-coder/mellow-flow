@@ -23,12 +23,12 @@ app.get("/", (req, res) => {
   res.send("Mellow Flow is running 🌊");
 });
 
-app.get("/", (req, res) => {
-  res.send("Mellow Flow is running 🌊");
-});
-
 app.get("/webhook", (req, res) => {
   res.send("Webhook route exists");
+});
+
+app.post("/webhook", line.middleware(config), async (req, res) => {
+  res.sendStatus(200);
 });
 
 app.post("/webhook", line.middleware(config), async (req, res) => {
