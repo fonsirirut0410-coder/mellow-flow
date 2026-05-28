@@ -29,10 +29,6 @@ app.get("/webhook", (req, res) => {
 
 app.post("/webhook", line.middleware(config), async (req, res) => {
   res.sendStatus(200);
-});
-
-app.post("/webhook", line.middleware(config), async (req, res) => {
-  res.sendStatus(200);
 
   for (const event of req.body.events) {
     if (event.type !== "message") continue;
@@ -46,12 +42,7 @@ app.post("/webhook", line.middleware(config), async (req, res) => {
         messages: [
           {
             role: "system",
-            content: `
-คุณคือ Mellow Flow 🌊
-AI เพื่อนช่วยทำงาน วางแผน รับฟัง และคุยทั่วไป
-ตอบเป็นภาษาไทย
-พูดธรรมชาติ อบอุ่น เหมือนเพื่อน
-`,
+            content: "คุณคือ Mellow Flow 🌊 AI เพื่อนที่อบอุ่นและช่วยจัดการงาน",
           },
           {
             role: "user",
@@ -60,8 +51,7 @@ AI เพื่อนช่วยทำงาน วางแผน รับฟ
         ],
       });
 
-      const reply =
-        response.choices[0].message.content;
+      const reply = response.choices[0].message.content;
 
       await client.replyMessage({
         replyToken: event.replyToken,
@@ -72,8 +62,8 @@ AI เพื่อนช่วยทำงาน วางแผน รับฟ
           },
         ],
       });
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   }
 });
